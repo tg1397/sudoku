@@ -1,0 +1,53 @@
+/*
+
+NAME:Trisha Gagnon
+FILE:stack.cc
+DESC:Implements the methods within the stack class
+DATE:Last updated 10/06
+
+*/
+
+#include <iostream>
+#include "stack.h"
+#include <cassert>
+
+using namespace std;
+
+
+stack::stack() {
+  _create();
+}
+
+stack::node::node(int item, stack::node* after) {
+  _data = item;
+  next = after;
+}
+
+void stack::_create() {
+  _top = NULL;
+}
+
+void stack::_destroy() {
+  while (!empty())
+    pop();
+}
+
+bool stack::empty() const {
+  return _top == NULL;
+}
+
+void stack::push(const stack_Element & item) {
+  _top = new node(item, _top);
+  
+}
+
+stack_Element stack::top() const {
+  assert (!empty());
+  return _top -> _data;
+}
+
+void stack::pop() {
+  node *dead = _top;
+  _top = _top -> next;
+  delete dead;
+}

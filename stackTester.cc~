@@ -1,0 +1,6 @@
+#include "stack.h"
+
+int main() {
+  stack s;
+  s.push(4);
+}

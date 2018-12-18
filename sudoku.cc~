@@ -1,0 +1,73 @@
+#include <iostream>
+#include "sudokuboard.h"
+#include "stack.h"
+
+//CITE: Erick
+//DESC: The makefile was missing stack.o
+//DESC: Also the constructor for a struct within a class
+//DESC: There are apparently magic chars that can't be seen
+
+//CITE: Alexei
+//DESC: Letting me talk at her to form ideas
+
+using namespace std;
+
+
+int main() {
+
+  //Code from nqueens in class
+  
+  
+  sudokuboard board(cin);
+  stack rowColPlaced;
+  //size_t infinity = 0;
+  
+  size_t lowest; 
+
+  int placed;
+  
+  while (!board.solved()) {
+  int constrainedRow;
+  int constrainedCol;
+  string chars;
+  lowest = 10; 
+  placed = 1;
+  
+    
+
+  for(int row = 0; row < 9; row++) {
+    for(int col = 0; col < 9; col++) {
+      //	cout << row << col << endl;
+      //	cout << endl << endl;
+	string toPlace = board.placeableChars(row, col);
+	if (toPlace.length() < lowest && toPlace.length() > 0) {
+	  constrainedRow = row;
+	  constrainedCol = col;
+	  chars = toPlace;
+	  lowest = toPlace.length();
+	}
+    }
+  }
+  //cout << "placing" << endl;
+  
+  //cout << constrainedRow << constrainedCol << endl;
+  //cout << chars << endl;
+  if (!board.canPlace(constrainedRow, constrainedCol, chars[0])) { 
+    cout << "ERROR" << endl;
+    return 0;
+  }
+  board.place(constrainedRow, constrainedCol, chars[0]);
+  //rowColPlaced.push(constrainedRow);
+  //  rowColPlaced.push(constrainedCol);
+  //  rowColPlaced.push(placed);
+  //board.print();
+  // cout << infinity << endl;
+  //cout << endl << endl;
+  // infinity++;
+	
+  }
+      
+  board.print();
+  
+  return 0;
+}
